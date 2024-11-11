@@ -47,7 +47,7 @@ async function handleSubmit(event) {
       iziToast.show({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
-        position: 'topRight',
+        position: 'right',
         color: '#ef4040',
         messageColor: '#fff',
         theme: 'dark',
@@ -106,7 +106,18 @@ async function loadMorePage() {
     });
 
     const lastPage = Math.ceil(response.data.total / ITEMS_PER_PAGE);
-    lastPage === page ? hideLoadMoreBtn() : showLoadMoreBtn();
+    if (lastPage === page) {
+      hideLoadMoreBtn();
+      iziToast.show({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'bottomCenter',
+        color: '#E6E6FA',
+        messageColor: '#483D8B',
+        theme: 'light',
+      });
+      return;
+    }
+    showLoadMoreBtn();
   } catch (error) {
     console.log(error);
   } finally {
