@@ -27,6 +27,14 @@ async function handleSubmit(event) {
   event.preventDefault();
   list.innerHTML = '';
   if (!input.value.trim()) {
+    iziToast.show({
+      message:
+        "Please enter the data to perform the search.",
+      position: 'topRight',
+      color: '#ef4040',
+      messageColor: '#fff',
+      theme: 'dark',
+    });
     return;
   }
   page = 1;
@@ -47,7 +55,7 @@ async function handleSubmit(event) {
       iziToast.show({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
-        position: 'right',
+        position: 'topRight',
         color: '#ef4040',
         messageColor: '#fff',
         theme: 'dark',
